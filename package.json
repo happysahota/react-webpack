@@ -22,7 +22,7 @@
   "scripts": {
     "build":"webpack --watch",
     "build:prod":"webpack -p --watch",
-    "dev": "./node_modules/.bin/webpack-dev-server --content-base public --inline --hot",
+    "dev": "webpack-dev-server --content-base public --inline --hot",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
