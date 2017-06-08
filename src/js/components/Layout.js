@@ -11,13 +11,15 @@ export default class Layout extends React.Component {
                         footer:"footer from Layout"
                     };
     }
+
+    changeHandler(title){
+        this.setState({title});
+    }
+
     render() {
-        setTimeout(()=>{
-            this.setState({title:"Welcome...Happy!"});
-        }, 3000);
         return (
             <div>
-                <Header title={this.state.title} />
+                <Header changeHandler={this.changeHandler.bind(this)} title={this.state.title} />
                 <Footer title={this.state.footer} />
             </div>
         );
