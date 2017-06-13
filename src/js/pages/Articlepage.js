@@ -2,28 +2,24 @@ import React  from "react";
 
 import ArticleDesc from "../components/page/ArticleDesc"
 
+import ArticlesStore from "../store/articles";
+
 export default class Articlepage extends React.Component {
+    constructor () {
+        super();
+        this.state = {
+            articledesc: ArticlesStore.getArticles()
+        }
+    }
+
     render () {
         const {articleid} = this.props.params;
-        const articledesc = [
-            {
-                id:1,
-                title:'First Title',
-                desc:'First Desc'
-            },{
-                id:2,
-                title:'Second Title',
-                desc:'Second Desc'
-            },{
-                id:3,
-                title:'Third Title',
-                desc:'Third Desc'
-            },
-        ].filter((article)=> {
+        const {articledesc} = this.state;
+        const articledescComm = articledesc.filter((article)=> {
                             return articleid==article.id;
                         });
         return (
-            <ArticleDesc title={articledesc[0].title} desc={articledesc[0].desc}/>
+            <ArticleDesc title={articledescComm[0].title} desc={articledescComm[0].desc}/>
         );
     }
 }
