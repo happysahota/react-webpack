@@ -24,7 +24,6 @@ export default class Indexpage extends React.Component {
         const articlesComp = articles.map((article)=><Article key={article.id} linkId={article.id} title={article.title}/>)
         return (
             <div class="main">
-                Here goes the main Index
                 {articlesComp}
             </div>
         );

@@ -22,7 +22,11 @@ module.exports = {
   },
   output: {
     path: __dirname + "/public/",
-    filename: "./js/main.min.js"
+    filename: "./js/main.min.js",
+    publicPath: "/"
+  },
+  devServer:{
+    historyApiFallback: true
   },
   plugins: !prod ? [] : [],
 };

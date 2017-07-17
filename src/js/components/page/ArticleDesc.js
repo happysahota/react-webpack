@@ -9,7 +9,6 @@ export default class Article extends React.Component {
         const {desc} = this.props;
         return (
             <div>
-                lklklfsd
                 <h1>{title}</h1>
                 <p>{desc}</p>
             </div>
