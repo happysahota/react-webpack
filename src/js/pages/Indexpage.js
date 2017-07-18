@@ -1,6 +1,7 @@
 import React from "react";
+const Link = require("react-router-dom").Link;
 
-import Article from "../components/page/Article";
+// import Article from "../components/page/Article";
 import ArticlesStore from "../store/articles";
 export default class Indexpage extends React.Component {
     constructor () {
@@ -18,10 +19,15 @@ export default class Indexpage extends React.Component {
         })
     }
 
+    showBack() {
+        this.props.backHandler()
+    }
+
     render () {
         const {articles} = this.state;
 
-        const articlesComp = articles.map((article)=><Article key={article.id} linkId={article.id} title={article.title}/>)
+        const articlesComp = articles.map((article)=><div key={article.id}><Link to={"/article/"+article.id} onClick={this.showBack.bind(this)}>{article.title}</Link></div>)
+
         return (
             <div class="main">
                 {articlesComp}
