@@ -1,8 +1,9 @@
 import React from "react";
 const Link = require("react-router-dom").Link;
 
-// import Article from "../components/page/Article";
-import ArticlesStore from "../store/articles";
+import ArticlesStore from "../store/ArticlesStore";
+import * as articlesAction from "../actions/articleActions";
+
 export default class Indexpage extends React.Component {
     constructor () {
         super();
@@ -23,6 +24,10 @@ export default class Indexpage extends React.Component {
         this.props.backHandler()
     }
 
+    createClickHandler() {
+        articlesAction.createArticle(Date.now(), Date.now().toLocaleString());
+    }
+
     render () {
         const {articles} = this.state;
 
@@ -30,6 +35,7 @@ export default class Indexpage extends React.Component {
 
         return (
             <div class="main">
+                <button onClick={this.createClickHandler.bind(this)}>Create New Article</button>
                 {articlesComp}
             </div>
         );

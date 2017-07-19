@@ -1,7 +1,7 @@
 import React  from "react";
 
 import ArticleDesc from "../components/page/ArticleDesc"
-import ArticlesStore from "../store/articles";
+import ArticlesStore from "../store/ArticlesStore";
 
 export default class Articlepage extends React.Component {
     constructor (props) {
@@ -10,6 +10,14 @@ export default class Articlepage extends React.Component {
             articledesc: ArticlesStore.getArticles()
         }
     };
+
+    componentWillMount(){
+        ArticlesStore.on('articleAdded', ()=> {
+            this.setState({
+                articledesc: ArticlesStore.getArticles()
+            });
+        })
+    }
     
     render () {
         const {articleid} = this.props.match.params;
