@@ -6,17 +6,24 @@ import ArticlesStore from "../store/ArticlesStore";
 export default class Articlepage extends React.Component {
     constructor (props) {
         super(props);
+        this.getArticles = this.getArticles.bind(this);
         this.state = {
             articledesc: ArticlesStore.getArticles()
         }
     };
 
     componentWillMount(){
-        ArticlesStore.on('articleAdded', ()=> {
-            this.setState({
-                articledesc: ArticlesStore.getArticles()
-            });
-        })
+        ArticlesStore.on('articleAdded', this.getArticles);
+    }
+
+    componentWillUnmount() {
+        ArticlesStore.removeListener('articleAdded', this.getArticles);
+    }
+
+    getArticles() {
+        this.setState({
+            articledesc: ArticlesStore.getArticles()
+        });
     }
     
     render () {

@@ -7,23 +7,25 @@ import * as articlesAction from "../actions/articleActions";
 export default class Indexpage extends React.Component {
     constructor () {
         super();
+        this.getArticles  = this.getArticles.bind(this);
         this.state = {
             articles: ArticlesStore.getArticles()
         }
     }
 
     componentWillMount(){
-        ArticlesStore.on('articleAdded', ()=> {
-            this.setState({
-                articles: ArticlesStore.getArticles()
-            });
-        });
+        ArticlesStore.on('articleAdded', this.getArticles);
+        ArticlesStore.on('articlereloaded', this.getArticles);
+    }
 
-        
-        ArticlesStore.on('articlereloaded', ()=> {
-            this.setState({
-                articles: ArticlesStore.getArticles()
-            });
+    componentWillUnmount() {
+        ArticlesStore.removeListener('articleAdded', this.getArticles);
+        ArticlesStore.removeListener('articlereloaded', this.getArticles);
+    }
+
+    getArticles() {
+        this.setState({
+            articles: ArticlesStore.getArticles()
         });
     }
 
