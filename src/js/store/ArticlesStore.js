@@ -36,11 +36,19 @@ class articles extends EventEmitter {
         return this.articles;
     }
 
+    reloadArticles(articles) {
+        this.articles = articles;
+        this.emit("articlereloaded");
+    }
+
     handleDispatcher(action) {
         switch(action.type) {
-            case "CREATE_ARTICLE": {
+            case "CREATE_ARTICLE": 
                 this.createArticle(action.title, action.desc);
-            }
+                break;
+            case "RELOAD_ARTICLE":
+                this.reloadArticles(action.records);
+                break;
         }
     }
 }

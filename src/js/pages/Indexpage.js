@@ -15,9 +15,16 @@ export default class Indexpage extends React.Component {
     componentWillMount(){
         ArticlesStore.on('articleAdded', ()=> {
             this.setState({
-                articledesc: ArticlesStore.getArticles()
+                articles: ArticlesStore.getArticles()
             });
-        })
+        });
+
+        
+        ArticlesStore.on('articlereloaded', ()=> {
+            this.setState({
+                articles: ArticlesStore.getArticles()
+            });
+        });
     }
 
     showBack() {
@@ -28,14 +35,18 @@ export default class Indexpage extends React.Component {
         articlesAction.createArticle(Date.now(), Date.now().toLocaleString());
     }
 
+    reloadClickHandler() {
+        articlesAction.reloadArticles();
+    }
+
     render () {
         const {articles} = this.state;
-
         const articlesComp = articles.map((article)=><div key={article.id}><Link to={"/article/"+article.id} onClick={this.showBack.bind(this)}>{article.title}</Link></div>)
 
         return (
             <div class="main">
                 <button onClick={this.createClickHandler.bind(this)}>Create New Article</button>
+                <button onClick={this.reloadClickHandler.bind(this)}>Reload Articles</button>
                 {articlesComp}
             </div>
         );

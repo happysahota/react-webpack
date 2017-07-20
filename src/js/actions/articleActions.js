@@ -14,3 +14,29 @@ export function deleteArticle (id){
         id: id
     });
 }
+
+export function reloadArticles (){
+    // dispatcher.dispatch({
+    //     type:'FETCH_ARTICLE'
+    // });
+    setTimeout(()=>{
+        dispatcher.dispatch({
+            type: 'RELOAD_ARTICLE',
+            records: [
+                {
+                    id:10,
+                    title:'Pehla Title',
+                    desc:'First Desc'
+                },{
+                    id:11,
+                    title:'Dusra Title',
+                    desc:'Second Desc'
+                },{
+                    id:12,
+                    title:'Third Title',
+                    desc:'Teesra Desc'
+                }
+            ]
+        });
+    }, 1500);
+}
