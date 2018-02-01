@@ -1,3 +1,5 @@
-# react-webpack
+# Decsriptive Doc
 
-my way to learn ReactJS and understand how WebPack work. settings of webpack can be used in any project just like that.
+1. ReactJS
+2. Axios
+3. Bulma
